@@ -1,6 +1,6 @@
+import { AZURE_PROJECT_ENDPOINT, AGENT_ID } from "./config.js";
 import { SECRET_KEY } from "./secret.js";
 
-import { AZURE_PROJECT_ENDPOINT, AZURE_API_KEY, AGENT_ID } from "./config.js";
 
 async function sendMessageToAgent(userInput) {
     const url = `${AZURE_PROJECT_ENDPOINT}/agents/${AGENT_ID}/runs`;
