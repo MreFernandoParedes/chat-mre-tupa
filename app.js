@@ -18,7 +18,7 @@ async function sendMessageToAgent(userInput) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "api-key": AZURE_API_KEY // se inyectará más adelante
+            "api-key": SECRET_KEY // se inyectará más adelante
         },
         body: JSON.stringify(body)
     });
