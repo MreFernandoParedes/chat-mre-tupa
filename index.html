@@ -1,1 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat TUPA - Ministerio de Relaciones Exteriores</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <img src="./img/logo-mre.png" alt="Logo MRE" class="logo">
+    <h1>Chat TUPA – Ministerio de Relaciones Exteriores del Perú</h1>
+</header>
+
+<div id="chat-container">
+    <div id="messages"></div>
+
+    <div id="input-area">
+        <input type="text" id="user-input" placeholder="Escribe tu consulta sobre trámites del MRE…" />
+        <button id="send-btn">Enviar</button>
+    </div>
+</div>
+
+<footer>
+    Plataforma de consulta | TUPA del Ministerio de Relaciones Exteriores
+</footer>
+
+<script type="module">
+import { sendMessageToAgent } from "./app.js";
+
+const input = document.getElementById("user-input");
+const sendBtn = document.getElementById("send-btn");
+const messagesDiv = document.getElementById("messages");
+
+function appendMessage(role, text) {
+    const div = document.createElement("div");
+    div.className = role;
+    div.textContent = text;
+    messagesDiv.appendChild(div);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+sendBtn.addEventListener("click", async () => {
+    const text = input.value.trim();
+    if (!text) return;
+    
+    appendMessage("user", text);
+    input.value = "";
+
+    appendMessage("bot", "Pensando...");
+
+    try {
+        const reply = await sendMessageToAgent(text);
+        messagesDiv.lastChild.textContent = reply;
+    } catch (e) {
+        messagesDiv.lastChild.textContent = "Error contactando el servicio 😞";
+        console.error(e);
+    }
+});
+</script>
+
+</body>
+</html>
 
