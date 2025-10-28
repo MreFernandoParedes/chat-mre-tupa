@@ -1,3 +1,5 @@
+import { SECRET_KEY } from "./secret.js";
+
 import { AZURE_PROJECT_ENDPOINT, AZURE_API_KEY, AGENT_ID } from "./config.js";
 
 async function sendMessageToAgent(userInput) {
